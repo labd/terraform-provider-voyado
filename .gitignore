@@ -1,0 +1,23 @@
+terraform-provider-*
+terraform-provider-_*
+*.backup
+/dist/*
+coverage.txt
+
+# Terraform files
+.terraform/
+terraform.*
+crash.log
+
+
+# Local files
+/local/*
+!/local/*.example
+
+# Go modules
+vendor/
+
+/.idea
+/.env
+/go.work*
+/.vscode

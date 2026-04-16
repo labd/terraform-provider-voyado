@@ -69,21 +69,3 @@ Import an existing schema by id:
 ```bash
 terraform import voyado_interaction_schema.reuse Reuse-Spring-2023
 ```
-
-## Try the minimal example
-
-See [`examples/minimal`](examples/minimal) for a small root module, `dev_overrides` instructions, and `terraform.tfvars.example`.
-
-## Development
-
-Build the provider binary:
-
-```bash
-go build -o terraform-provider-voyado .
-```
-
-Run the provider in debug mode for Terraform CLI plugin tracing:
-
-```bash
-go run . -debug
-```

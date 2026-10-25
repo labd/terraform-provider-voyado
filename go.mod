@@ -1,6 +1,6 @@
 module github.com/labd/terraform-provider-voyado
 
-go 1.26.2
+go 1.27
 
 require (
 	github.com/hashicorp/terraform-plugin-framework v1.19.0
@@ -71,3 +71,5 @@ require (
 	gopkg.in/yaml.v2 v2.3.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
+
+tool github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs

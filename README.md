@@ -8,7 +8,7 @@ Terraform provider for [Voyado Engage](https://developer.voyado.com/docs/api/the
 
 ## Requirements
 
-- [Go](https://go.dev/dl/) 1.26 or newer (see `go.mod`)
+- [Go](https://go.dev/dl/) 1.27 or newer (see `go.mod`)
 
 ## Provider configuration
 

@@ -1,17 +1,17 @@
 name: Run Tests
 
-on: [push]
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: read
 
 jobs:
 
   test:
     runs-on: ubuntu-latest
-
-    services:
-      commercetools:
-        image: labdigital/commercetools-mock-server:3.0.0-beta.3
-        ports:
-        - 8989:8989
 
     steps:
     - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -33,14 +33,6 @@ jobs:
 
     - name: Run tests
       run: go test -timeout 30m -race ./...
-      env:
-        TF_ACC: 1
-        CTP_CLIENT_ID: unittest
-        CTP_CLIENT_SECRET: x
-        CTP_PROJECT_KEY: unittest
-        CTP_SCOPES: manage_project:unittest
-        CTP_API_URL: http://localhost:8989
-        CTP_AUTH_URL: http://localhost:8989
 
     - name: build binary
       uses: goreleaser/goreleaser-action@a4f02ab5355a589de60d917a659ce617ed19b3de # v7.3.0
@@ -49,6 +41,20 @@ jobs:
         args: build --snapshot --clean --single-target
       env:
         GOPATH: ${{ env.GOPATH }}
+
+  govulncheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version-file: go.mod
+          check-latest: true
+          cache: false
+      - name: Run govulncheck
+        run: go run golang.org/x/vuln/cmd/govulncheck@v1.9.0 ./...
 
   changie:
     runs-on: ubuntu-latest
